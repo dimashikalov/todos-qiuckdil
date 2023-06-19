@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
-    <div><v-checkbox v-model="checkbox"></v-checkbox></div>
-    <div>{{ todo.id + ". " + todo.title }}</div>
+    <div>
+      <v-checkbox v-model="check" @change="checkTodo"></v-checkbox>
+    </div>
+    <div>{{ todo.title }}</div>
   </div>
 </template>
 
@@ -11,6 +13,19 @@ export default {
     todo: {
       type: Object,
       required: true,
+    },
+  },
+  data: function () {
+    return { check: this.todo.completed };
+  },
+
+  methods: {
+    checkTodo() {
+      let todo = {
+        ...this.todo,
+        completed: !this.todo.completed,
+      };
+      this.$emit("checkTodo", todo);
     },
   },
 };

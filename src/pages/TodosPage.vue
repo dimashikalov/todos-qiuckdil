@@ -1,7 +1,12 @@
 <template>
   <v-container>
-    <InputForm />
-    <Todo v-for="todo in todos" :todo="todo" :key="todo.id" />
+    <InputForm @addTodo="addTodo" />
+    <Todo
+      v-for="todo in todos"
+      :todo="todo"
+      :key="todo.id"
+      @checkTodo="checkTodo"
+    />
   </v-container>
 </template>
 
@@ -15,13 +20,33 @@ export default {
     InputForm,
   },
   data: () => ({
-    todos: [
-      { id: 1, title: "todo 1", completed: false },
-      { id: 2, title: "todo 2", completed: false },
-      { id: 3, title: "todo 3", completed: false },
-      { id: 4, title: "todo 4", completed: false },
-    ],
+    todos: [],
   }),
+
+  methods: {
+    addTodo(todo) {
+      this.todos.push(todo);
+      localStorage.setItem("todos", JSON.stringify(this.todos));
+    },
+
+    checkTodo(todo) {
+      this.todos.map((t) => {
+        if (t.id === todo.id) {
+          t.completed = todo.completed;
+          localStorage.setItem("todos", JSON.stringify(this.todos));
+        }
+      });
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("todos")) {
+      try {
+        this.todos = JSON.parse(localStorage.getItem("todos"));
+      } catch (error) {
+        console.log("err ", error);
+      }
+    }
+  },
 };
 </script>
 
