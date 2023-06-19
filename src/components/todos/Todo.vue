@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: {
     todo: {
@@ -20,12 +21,13 @@ export default {
   },
 
   methods: {
+    ...mapMutations(["checkTodo"]),
     checkTodo() {
       let todo = {
         ...this.todo,
         completed: !this.todo.completed,
       };
-      this.$emit("checkTodo", todo);
+      this.$store.commit("checkTodo", todo);
     },
   },
 };

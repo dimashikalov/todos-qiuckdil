@@ -2,10 +2,9 @@
   <v-container>
     <InputForm @addTodo="addTodo" />
     <Todo
-      v-for="todo in todos"
+      v-for="todo in $store.getters.getAllTodos"
       :todo="todo"
       :key="todo.id"
-      @checkTodo="checkTodo"
     />
   </v-container>
 </template>
@@ -13,7 +12,7 @@
 <script>
 import Todo from "@/components/todos/Todo.vue";
 import InputForm from "@/components/todos/InputForm.vue";
-
+import { mapActions, mapMutations } from "vuex";
 export default {
   components: {
     Todo,
@@ -22,30 +21,20 @@ export default {
   data: () => ({
     todos: [],
   }),
-
-  methods: {
-    addTodo(todo) {
-      this.todos.push(todo);
-      localStorage.setItem("todos", JSON.stringify(this.todos));
-    },
-
-    checkTodo(todo) {
-      this.todos.map((t) => {
-        if (t.id === todo.id) {
-          t.completed = todo.completed;
-          localStorage.setItem("todos", JSON.stringify(this.todos));
-        }
-      });
-    },
-  },
   mounted() {
-    if (localStorage.getItem("todos")) {
-      try {
-        this.todos = JSON.parse(localStorage.getItem("todos"));
-      } catch (error) {
-        console.log("err ", error);
-      }
-    }
+    this.fetchTodos();
+  },
+  methods: {
+    ...mapActions(["fetchTodos"]),
+    ...mapMutations(["addTodo", "checkTodo"]),
+
+    addTodo(todo) {
+      this.$store.commit("addTodo", todo);
+    },
+
+    // checkTodo(todo) {
+    //   this.$store.commit("checkTodo", todo);
+    // },
   },
 };
 </script>
