@@ -6,7 +6,7 @@
     <div @dblclick="updateTodo">{{ todo.title }}</div>
     <v-spacer />
     <v-btn icon small @click="deleteTodo">
-      <v-icon> mdi-delete</v-icon>
+      <v-icon>mdi-delete</v-icon>
     </v-btn>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["checkTodo", "updateTodo"]),
+    ...mapMutations(["checkTodo", "updateTodo", "deleteTodo"]),
 
     checkTodo() {
       let todo = {
@@ -43,6 +43,7 @@ export default {
       };
       this.$store.commit("updateTodo", newTodo);
     },
+
     deleteTodo() {
       this.$store.commit("deleteTodo", this.todo.id);
     },

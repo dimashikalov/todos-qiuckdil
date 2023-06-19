@@ -12,29 +12,18 @@
 <script>
 import Todo from "@/components/todos/Todo.vue";
 import InputForm from "@/components/todos/InputForm.vue";
-import { mapActions, mapMutations } from "vuex";
+import { mapActions } from "vuex";
 export default {
   components: {
     Todo,
     InputForm,
   },
-  data: () => ({
-    // todos: [],
-  }),
+  data: () => ({}),
   mounted() {
     this.fetchTodos();
   },
   methods: {
     ...mapActions(["fetchTodos"]),
-    ...mapMutations(["addTodo", "checkTodo"]),
-
-    // addTodo(todo) {
-    //   this.$store.commit("addTodo", todo);
-    // },
-
-    // checkTodo(todo) {
-    //   this.$store.commit("checkTodo", todo);
-    // },
   },
 };
 </script>
