@@ -2,8 +2,16 @@
   <v-container fluid>
     <v-app-bar color="light-blue" dark>
       <v-spacer />
-      <v-btn outlined class="ml-4">Главная</v-btn>
-      <v-btn outlined class="ml-4">Список дел</v-btn>
+      <v-btn outlined class="ml-4">
+        <router-link style="text-decoration: none; color: inherit" to="/"
+          >Главная</router-link
+        >
+      </v-btn>
+      <v-btn outlined class="ml-4">
+        <router-link style="text-decoration: none; color: inherit" to="/todos"
+          >Список дел</router-link
+        >
+      </v-btn>
     </v-app-bar>
   </v-container>
 </template>
