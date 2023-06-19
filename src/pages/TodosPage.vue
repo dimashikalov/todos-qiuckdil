@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <InputForm @addTodo="addTodo" />
+    <InputForm />
     <Todo
       v-for="todo in $store.getters.getAllTodos"
       :todo="todo"
@@ -19,7 +19,7 @@ export default {
     InputForm,
   },
   data: () => ({
-    todos: [],
+    // todos: [],
   }),
   mounted() {
     this.fetchTodos();
@@ -28,9 +28,9 @@ export default {
     ...mapActions(["fetchTodos"]),
     ...mapMutations(["addTodo", "checkTodo"]),
 
-    addTodo(todo) {
-      this.$store.commit("addTodo", todo);
-    },
+    // addTodo(todo) {
+    //   this.$store.commit("addTodo", todo);
+    // },
 
     // checkTodo(todo) {
     //   this.$store.commit("checkTodo", todo);

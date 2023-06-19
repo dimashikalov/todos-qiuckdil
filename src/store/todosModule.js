@@ -28,8 +28,8 @@ export default {
         }
       });
     },
-    removeTodo(state, payload) {
-      state.todos = state.todos.filter((t) => t.id !== payload.id);
+    deleteTodo(state, payload) {
+      state.todos = state.todos.filter((t) => t.id !== payload);
       localStorage.setItem("todos", JSON.stringify(state.todos));
     },
   },
