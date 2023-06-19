@@ -17,13 +17,15 @@ export default {
     ...mapMutations(["addTodo"]),
 
     addTodo() {
-      let todo = {
-        id: Date.now(),
-        title: this.title,
-        completed: false,
-      };
-      this.$store.commit("addTodo", todo);
-      this.title = "";
+      if (this.title) {
+        let todo = {
+          id: Date.now(),
+          title: this.title,
+          completed: false,
+        };
+        this.$store.commit("addTodo", todo);
+        this.title = "";
+      }
     },
   },
 };

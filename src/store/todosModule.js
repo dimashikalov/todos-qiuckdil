@@ -44,7 +44,6 @@ export default {
       if (localStorage.getItem("todos")) {
         try {
           let lsTodos = JSON.parse(localStorage.getItem("todos"));
-          console.log("ls", lsTodos);
           context.commit("setTodos", lsTodos);
         } catch (error) {
           console.log("err ", error);

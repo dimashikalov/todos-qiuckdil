@@ -3,8 +3,11 @@
     <div>
       <v-checkbox v-model="check" @change="checkTodo"></v-checkbox>
     </div>
-    <div @dblclick="updateTodo">{{ todo.title }}</div>
+    <div>{{ todo.title }}</div>
     <v-spacer />
+    <v-btn icon small @click="updateTodo" class="mr-4">
+      <v-icon>mdi-pen</v-icon>
+    </v-btn>
     <v-btn icon small @click="deleteTodo">
       <v-icon>mdi-delete</v-icon>
     </v-btn>
@@ -37,11 +40,13 @@ export default {
 
     updateTodo() {
       let title = prompt();
-      let newTodo = {
-        ...this.todo,
-        title,
-      };
-      this.$store.commit("updateTodo", newTodo);
+      if (title) {
+        let newTodo = {
+          ...this.todo,
+          title,
+        };
+        this.$store.commit("updateTodo", newTodo);
+      }
     },
 
     deleteTodo() {
